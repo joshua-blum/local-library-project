@@ -12,13 +12,17 @@ function getBooksBorrowedCount(books) {
     if (book.borrows.some((borrow) => borrow.returned === false)) totalBorrowCount++; 
     return acc;
   });
-  /*
-  let borrowCounting = books.find((book) => {
-    //if anywhere in the borrows for this book it has not been returned, add to borrow count
-    if (book.borrows.some((borrow) => borrow.returned === false)) totalBorrowCount++;
-  });
-  */
+
   return totalBorrowCount;
+}
+
+//helper function to truncate an array based on a maximum amount of items permitted
+function truncateArray(array, maxValue){
+  let truncatedArray = [];
+  for (let i = 0; i < maxValue; i++){
+    truncatedArray[i] = array[i];
+  };
+  return truncatedArray;
 }
 
 function getMostCommonGenres(books) {
@@ -55,11 +59,7 @@ function getMostCommonGenres(books) {
   if (sortedGenres.length <= 5) return sortedGenres;
 
   //else, let truncatedArray = [arrayEleemnts [0]-[4]]
-  let truncatedArray = [];
-  for(let i = 0; i < 5; i++){
-    truncatedArray[i] = sortedGenres[i];
-  };
-  return truncatedArray; 
+  return truncateArray(sortedGenres, 5);
 }
 
 function getMostPopularBooks(books) {
@@ -94,11 +94,7 @@ function getMostPopularBooks(books) {
   if (sortedBooksByPopularity.length <=5) return sortedBooksByPopularity;
 
   //else, let truncatedArray = [array elements 0-4]
-  let truncatedArray = [];
-  for(let i = 0; i < 5; i++){
-    truncatedArray[i] = sortedBooksByPopularity[i];
-  };
-  return truncatedArray;
+  return truncateArray(sortedBooksByPopularity, 5);
 }
 
 function getMostPopularAuthors(books, authors) {
@@ -139,11 +135,7 @@ function getMostPopularAuthors(books, authors) {
   if (sortedAuthors.length <= 5) return sortedAuthors;
 
   //else, let truncatedArray = [arrayEleemnts [0]-[4]]
-  let truncatedArray = [];
-  for(let i = 0; i < 5; i++){
-    truncatedArray[i] = sortedAuthors[i];
-  };
-  return truncatedArray;
+  return truncateArray(sortedAuthors, 5);
 }
 
 module.exports = {
